@@ -61,6 +61,17 @@ Start the server
 - [TMDB API](https://www.themoviedb.org/documentation/api)
 - [Youtube API](https://developers.google.com/youtube/v3)
 
+#### Get images
+
+```http
+  GET /api/v1/movies/${request}
+```
+
+| Parameter   | Type     | Description                                       |
+| :---------- | :------- | :------------------------------------------------ |
+| `request    | `string` | **Required**. the search term of movies to fetch  |
+
+
 
 [Back To The Top](#netflix-clone)
 
