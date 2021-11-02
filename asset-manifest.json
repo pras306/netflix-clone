@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/image-browser/static/css/main.396f2313.chunk.css",
+    "main.js": "/image-browser/static/js/main.86b3dfcc.chunk.js",
+    "main.js.map": "/image-browser/static/js/main.86b3dfcc.chunk.js.map",
+    "runtime-main.js": "/image-browser/static/js/runtime-main.608ef6c0.js",
+    "runtime-main.js.map": "/image-browser/static/js/runtime-main.608ef6c0.js.map",
+    "static/js/2.f8e39dde.chunk.js": "/image-browser/static/js/2.f8e39dde.chunk.js",
+    "static/js/2.f8e39dde.chunk.js.map": "/image-browser/static/js/2.f8e39dde.chunk.js.map",
+    "index.html": "/image-browser/index.html",
+    "static/css/main.396f2313.chunk.css.map": "/image-browser/static/css/main.396f2313.chunk.css.map",
+    "static/js/2.f8e39dde.chunk.js.LICENSE.txt": "/image-browser/static/js/2.f8e39dde.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/image-browser/static/media/YanoneKaffeesatz-Bold.ebadfc70.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.608ef6c0.js",
+    "static/js/2.f8e39dde.chunk.js",
+    "static/css/main.396f2313.chunk.css",
+    "static/js/main.86b3dfcc.chunk.js"
+  ]
+}
