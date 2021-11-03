@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+// import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
+// import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import './Row.css';
 import { YOUTUBE_BASE_URL } from '../../api/requests';
@@ -27,15 +29,20 @@ const Row = ({ title, fetchURL, isLargeRow }) => {
         ref.current.scrollLeft += offset;
     }
 
-    const onVideoSearch = async(term) => {
-        let response = await axios.get(YOUTUBE_BASE_URL + `/${term}`);
-        setTrailer(response.data[0]);
-    }
-
-    const handleClick = (movie) => {
+    const handleClick = async (movie) => {
         setTrailer('');
-        onVideoSearch(`${movie?.name || movie?.original_name || movie?.title} trailer`);
-        setIsOpen(true);
+        let term = `${movie?.name || movie?.original_name || movie?.title} trailer`;
+        try {
+            let response = await axios.get(YOUTUBE_BASE_URL + `/${term}`);
+            if(response.data.length <= 0) {
+                alert("Unable to fetch trailer of the movie you requested.");
+                return;
+            }
+            setTrailer(response.data[0]);
+            setIsOpen(true);
+        } catch(err) {
+            alert("Unable to fetch trailer of the movie you requested.");
+        }
     }
 
     const renderMovieTiles = movies ? movies.map((movie) => {
@@ -49,14 +56,18 @@ const Row = ({ title, fetchURL, isLargeRow }) => {
             <h2>{title}</h2>
             <div className='row__posters' ref={ref}>
                 <div className='row__arrow'>
-                    <i className='row__leftarrow' onClick={() => scroll(-500)}></i>
+                    <i className='row__leftarrow' onClick={() => scroll(-1000)}></i>
                 </div>
                 {renderMovieTiles}
                 <div className='row__arrow'>
-                    <i className='row__rightarrow' onClick={() => scroll(500)}></i>
+                    <i className='row__rightarrow' onClick={() => scroll(1000)}></i>
                 </div>
             </div>
-            {trailer && <Modal video={trailer} open={isOpen} onClose={() => setIsOpen(false)} />}
+            {trailer &&
+                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                    <iframe title="player" src={`https://www.youtube.com/embed/${trailer.id.videoId}?autoplay=1`} frameBorder="0"></iframe>
+                </Modal>
+            }
         </div>
     );
 }

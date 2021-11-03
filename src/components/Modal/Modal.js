@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom';
 
 import './Modal.css';
 
-const Modal = ({ video, open, onClose }) => {
+const Modal = ({ open, onClose, children }) => {
 
     if(!open) return null;
-
-    const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`;
 
     return ReactDOM.createPortal(
         <div className="modal">
             <div className="modal__icon" onClick={onClose}>X</div>
             <div className="modal__content">
-                <iframe title="player" src={videoSrc} frameBorder="0"></iframe>
+                {children}
             </div>
         </div>,
          document.querySelector("#modal")

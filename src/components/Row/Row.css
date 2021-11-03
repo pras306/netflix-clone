@@ -3,6 +3,11 @@
     color: var(--bgc-white);
 }
 
+.row > h2 {
+    font-family: var(--ff-roboto-medium);
+    margin: 0.5em 0;
+}
+
 .row__posters{
     display: flex;
     overflow-x: scroll;

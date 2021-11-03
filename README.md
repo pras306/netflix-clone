@@ -61,7 +61,7 @@ Start the server
 - [TMDB API](https://www.themoviedb.org/documentation/api)
 - [Youtube API](https://developers.google.com/youtube/v3)
 
-#### Get images
+#### Get movies
 
 ```http
   GET /api/v1/movies/${request}

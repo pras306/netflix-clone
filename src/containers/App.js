@@ -7,33 +7,29 @@ import Banner from '../components/Banner/Banner';
 import Row from '../components/Row/Row';
 
 const App = () => {
+
+  const renderRows = () => {
+    return TMDB_REQUESTS.map((request, id) => {
+      if(request.title.includes("Netflix Originals")) {
+        return (
+          <LazyLoad height={500} key={id}>
+            <Row title={request.title} fetchURL={TMDB_BASE_URL + request.fetchURL} isLargeRow />
+          </LazyLoad>
+        );
+      } else {
+        return (
+          <LazyLoad height={500} offset={[-100, 0]} key={id}>
+            <Row title={request.title} fetchURL={TMDB_BASE_URL + request.fetchURL} />
+          </LazyLoad>
+        );
+      }
+    });
+  };
+
   return (
     <div className="app">
-      <Banner fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchNetflixOriginals} />
-      <LazyLoad height={500}>
-        <Row title={'Netflix Originals'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchNetflixOriginals} isLargeRow />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Trending'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchTrending} />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Top Rated'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchTopRated} />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Action Movies'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchActionMovies} />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Comedy Movies'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchComedyMovies} />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Horror Movies'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchHorrorMovies} />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Romance Movies'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchRomanceMovies} />
-      </LazyLoad>
-      <LazyLoad height={500} offset={[-100, 0]}>
-        <Row title={'Documentaries'} fetchURL={TMDB_BASE_URL + TMDB_REQUESTS.fetchDocumentaries} />
-      </LazyLoad>
+      <Banner fetchURL={TMDB_BASE_URL + "/fetchNetflixOriginals"} />
+      {renderRows()}
     </div>
   );
 };

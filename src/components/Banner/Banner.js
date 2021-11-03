@@ -23,9 +23,17 @@ const Banner = ({ fetchURL }) => {
 
     const handleClick = async (movie) => {
         let term = `${movie?.name || movie?.original_name || movie?.title} trailer`;
-        let response = await axios.get(YOUTUBE_BASE_URL + `/${term}`);
-        setTrailer(response.data[0]);
-        setIsOpen(true);
+        try {
+            let response = await axios.get(YOUTUBE_BASE_URL + `/${term}`);
+            if(response.data.length <= 0) {
+                alert("Unable to fetch trailer of the movie you requested.");
+                return;
+            }
+            setTrailer(response.data[0]);
+            setIsOpen(true);
+        } catch(err) {
+            alert("Unable to fetch trailer of the movie you requested.");
+        }
     }
 
 
@@ -35,7 +43,11 @@ const Banner = ({ fetchURL }) => {
                 <h1>{ movie?.name || movie?.original_name || movie?.title }</h1>
                 <div className='banner__buttons'>
                     <button className='banner__button' onClick={() => handleClick(movie)}>Play Trailer</button>
-                    <Modal open={isOpen} video={trailer} onClose={() => setIsOpen(false)} />
+                    { trailer &&
+                        <Modal open={isOpen} video={trailer} onClose={() => setIsOpen(false)}>
+                            <iframe title="player" src={`https://www.youtube.com/embed/${trailer.id.videoId}?autoplay=1`} frameBorder="0"></iframe>
+                        </Modal>
+                    }
                 </div>
                 <div className='banner__description'>{movie.overview}</div>
             </div>            
