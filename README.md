@@ -60,11 +60,12 @@ Start the server
 
 - [TMDB API](https://www.themoviedb.org/documentation/api)
 - [Youtube API](https://developers.google.com/youtube/v3)
+- Custom Proxy Server for hiding API key - [https://backend-portfolio-proxy.herokuapp.com/api/v1](https://backend-portfolio-proxy.herokuapp.com/api/v1)
 
-#### Get movies
+#### GET movies
 
 ```http
-  GET /api/v1/movies/${request}
+  GET /movies/${request}
 ```
 
 | Parameter   | Type     | Description                                       |
