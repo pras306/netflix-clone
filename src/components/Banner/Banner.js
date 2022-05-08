@@ -36,6 +36,17 @@ const Banner = ({ fetchURL }) => {
         }
     }
 
+    const handleMovieOverview = (str, strLimiter) => {
+        if (str === undefined || str?.length <= 0) return null;
+
+        if (str?.length < strLimiter) {
+            return str;
+        }
+
+        let whiteSpaceIndex = strLimiter + str?.substring(strLimiter,)?.indexOf(' ');
+        return str?.substring(0, whiteSpaceIndex) + '....';
+    }
+
 
     return (
         <header className='banner' style={{ backgroundSize:'contain', backgroundImage:`${poster}`, backgroundPosition: 'center center'}}>
@@ -49,7 +60,7 @@ const Banner = ({ fetchURL }) => {
                         </Modal>
                     }
                 </div>
-                <div className='banner__description'>{movie.overview}</div>
+                <div className='banner__description'>{handleMovieOverview(movie.overview, 200)}</div>
             </div>            
         </header>
     );
